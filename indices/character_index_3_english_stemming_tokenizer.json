@@ -1,0 +1,31 @@
+{
+    "settings" : {
+        "analysis" : {
+            "analyzer" : {
+                "whitespace_lowercase" : {
+                    "tokenizer" : "whitespace",
+                    "filter" : [
+                        "lowercase",
+                        "english_stemmer"
+
+                    ]
+                }
+            },
+            "filter" : {
+                "english_stemmer" : {
+                    "type" : "stemmer",
+                    "name" : "english"
+                }
+            }
+        }
+    },
+    "mappings" : {
+        "properties" : {
+            "name":{
+                "type": "text",
+                "analyzer": "whitespace_lowercase"
+            }
+
+        }
+    }
+}

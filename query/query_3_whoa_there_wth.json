@@ -1,0 +1,28 @@
+{
+	"params":{
+		"term": "princesses beach"
+	},
+	"source": {
+		"query": {
+			"bool":{
+				"should": [
+					{
+						"match_phrase_prefix": {
+							"name": {
+								"query": "{{term}}"
+							}
+						}
+					},
+					{
+						"multi_match": {
+							"query": "{{term}}",
+							"fields":["name"],
+							"fuzziness": "2",
+							"prefix_length": 1
+						}
+					}
+				]
+			}
+		}
+	}
+}

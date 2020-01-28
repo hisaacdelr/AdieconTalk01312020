@@ -1,0 +1,476 @@
+{
+	"info": {
+		"_postman_id": "e5e6e432-e3c1-4d46-b8e7-20246adf08a9",
+		"name": "ES 7.5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Elasticsearch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9200",
+					"host": [
+						"localhost"
+					],
+					"port": "9200"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET mapping for all indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9200/_mapping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE index",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9200/character_index_1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Add document to index",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Princess Peach\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/character_index/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Query against all indices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": { \n  \t\"match\": { \n  \t\t\"name\": \"Princess \" \n  \t}\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Top whatever docs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": { \n  \t\"match_all\": { \n  \t}\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET List of Indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9200/_cat/indices/?v&s=index",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices",
+						""
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						},
+						{
+							"key": "s",
+							"value": "index"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET analyzer settings of an index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9200/character_index_1/_settings",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_1",
+						"_settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Analyze Input",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"Princesses peach\",\n\t\"analyzer\": \"whitespace_lowercase_stemming_analyzer\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/character_index_3/_analyze",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_3",
+						"_analyze"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index 1 - Basic",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\" : {\n        \"properties\" : {\n            \"name\":{\"type\": \"text\"}\n        }\n    }\n}\n"
+				},
+				"url": {
+					"raw": "localhost:9200/character_index_1",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index 2 - Simple Analyzer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"settings\" : {\n        \"analysis\" : {\n            \"analyzer\" : {\n                \"whitespace_lowercase\" : {\n                    \"tokenizer\" : \"whitespace\",\n                    \"filter\" : [\"lowercase\"]\n                }\n            }\n        }\n    },\n    \"mappings\" : {\n        \"properties\" : {\n            \"name\":{\n                \"type\": \"text\",\n                \"analyzer\": \"whitespace_lowercase\"\n            }\n\n        }\n    }\n}\n"
+				},
+				"url": {
+					"raw": "localhost:9200/character_index_2",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index 3 - English Stemming Tokenizer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"settings\" : {\n        \"analysis\" : {\n            \"analyzer\" : {\n                \"whitespace_lowercase\" : {\n                    \"tokenizer\" : \"whitespace\",\n                    \"filter\" : [\n                        \"lowercase\",\n                        \"english_stemmer\"\n\n                    ]\n                }\n            },\n            \"filter\" : {\n                \"english_stemmer\" : {\n                    \"type\" : \"stemmer\",\n                    \"name\" : \"english\"\n                }\n            }\n        }\n    },\n    \"mappings\" : {\n        \"properties\" : {\n            \"name\":{\n                \"type\": \"text\",\n                \"analyzer\": \"whitespace_lowercase\"\n            }\n\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "localhost:9200/character_index_3",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index 4 - Edge Ngram",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"settings\": {\n    \"analysis\": {\n      \"analyzer\": {\n        \"edge_ngram_analyzer\": {\n          \"tokenizer\": \"edge_ngram_tokenizer\",\n          \"filter\": [ \"lowercase\" ]\n        }\n      },\n      \"tokenizer\": {\n        \"edge_ngram_tokenizer\": {\n          \"type\": \"edge_ngram\",\n          \"min_gram\": 2,\n          \"max_gram\": 5,\n          \"token_chars\": [\"letter\", \"digit\"]\n        }\n      }\n    }\n  },\n  \"mappings\" : {\n      \"properties\" : {\n          \"name\": {\n              \"type\": \"text\",\n              \"analyzer\": \"edge_ngram_analyzer\"\n          }\n      }\n  }\n}\n"
+				},
+				"url": {
+					"raw": "localhost:9200/character_index_4",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"character_index_4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 1 - Basic",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n  \t\"match\": {\n  \t\t\"name\": \"princess\"\n  \t}\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 2 - Fuzzy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"fuzzy\": {\n            \"name\": {\n                \"value\": \"beach\"\n            }\n        }\n    }\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:9200/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 3 - WHOA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"params\":{\n\t\t\"term\": \"princesses beach\"\n\t},\n\t\"source\": {\n\t\t\"query\": {\n\t\t\t\"bool\":{\n\t\t\t\t\"should\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"match_phrase_prefix\": {\n\t\t\t\t\t\t\t\"name\": {\n\t\t\t\t\t\t\t\t\"query\": \"{{term}}\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"multi_match\": {\n\t\t\t\t\t\t\t\"query\": \"{{term}}\",\n\t\t\t\t\t\t\t\"fields\":[\"name\"],\n\t\t\t\t\t\t\t\"fuzziness\": \"2\",\n\t\t\t\t\t\t\t\"prefix_length\": 1\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/_search/template",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_search",
+						"template"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

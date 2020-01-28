@@ -1,0 +1,21 @@
+{
+    "settings" : {
+        "analysis" : {
+            "analyzer" : {
+                "whitespace_lowercase" : {
+                    "tokenizer" : "whitespace",
+                    "filter" : ["lowercase"]
+                }
+            }
+        }
+    },
+    "mappings" : {
+        "properties" : {
+            "name":{
+                "type": "text",
+                "analyzer": "whitespace_lowercase"
+            }
+
+        }
+    }
+}

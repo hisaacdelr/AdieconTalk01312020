@@ -1,0 +1,16 @@
+curl -X POST "localhost:9200/_bulk?pretty" -H 'Content-Type: application/json' -d'
+{ "index" : { "_index" : "character_index_1", "_id" : "Princess Peach" } }
+{ "name": "Princess Peach" }
+{ "index" : { "_index" : "character_index_1", "_id" : "Princess Daisy" } }
+{ "name": "Princess Daisy" }
+{ "index" : { "_index" : "character_index_1", "_id" : "Princess Zelda" } }
+{ "name": "Princess Zelda" }
+{ "index" : { "_index" : "character_index_1", "_id" : "Dr. Mario" } }
+{ "name": "Dr. Mario" }
+{ "index" : { "_index" : "character_index_1", "_id" : "Luigi" } }
+{ "name": "Luigi" }
+{ "index" : { "_index" : "character_index_1", "_id" : "Ada Lovelace" } }
+{ "name": "Ada Lovelace" }
+{ "index" : { "_index" : "character_index_1", "_id" : "princess null pointer exception" } }
+{ "name": "princess null" }
+'

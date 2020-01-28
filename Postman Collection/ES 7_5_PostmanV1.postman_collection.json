@@ -1,0 +1,426 @@
+{
+	"id": "e5e6e432-e3c1-4d46-b8e7-20246adf08a9",
+	"name": "ES 7.5",
+	"description": null,
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"4994f4a5-1bd4-408c-948f-de431a933c87",
+		"74627d6d-eb6e-4b1f-a686-7815306f7780",
+		"1b7cbb75-1a4c-4d84-a3bd-ff63fd00fc28",
+		"f8541456-743a-440b-9eb7-318f2b36ad89",
+		"ff9ad336-dc5c-4690-94b5-fe67a5e5887e",
+		"63ae4841-453d-4929-89b9-91b66e92a24d",
+		"809af6cd-ab38-4652-ab1f-ae8b14561969",
+		"d1fbb618-c743-4447-ac05-82d4acb2cb88",
+		"29aed828-c312-483c-a0b1-fb175dfedcf1",
+		"d3d44117-d345-4906-b6d9-95ed64c624ff",
+		"24a00792-715d-4410-a17f-6deaf63b6b0d",
+		"805577a1-16e6-4f7b-973e-a0ff773d69c5",
+		"54807cf3-7b7a-4651-807b-9c1fbd202d69",
+		"a262ed58-ff97-44a8-a7d8-34189d727b23",
+		"54bec153-a92e-44a7-bd9c-ba08ebc40dd6",
+		"0ed62de6-abc7-4ed9-9c5b-249f6c393583"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "0ed62de6-abc7-4ed9-9c5b-249f6c393583",
+			"name": "Query 3 - WHOA",
+			"url": "http://localhost:9200/_search/template",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"rawModeData": "{\n\t\"params\":{\n\t\t\"term\": \"princesses beach\"\n\t},\n\t\"source\": {\n\t\t\"query\": {\n\t\t\t\"bool\":{\n\t\t\t\t\"should\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"match_phrase_prefix\": {\n\t\t\t\t\t\t\t\"name\": {\n\t\t\t\t\t\t\t\t\"query\": \"{{term}}\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"multi_match\": {\n\t\t\t\t\t\t\t\"query\": \"{{term}}\",\n\t\t\t\t\t\t\t\"fields\":[\"name\"],\n\t\t\t\t\t\t\t\"fuzziness\": \"2\",\n\t\t\t\t\t\t\t\"prefix_length\": 1\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t}\n\t}\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "1b7cbb75-1a4c-4d84-a3bd-ff63fd00fc28",
+			"name": "DELETE index",
+			"url": "http://localhost:9200/character_index_1",
+			"description": "",
+			"data": null,
+			"dataMode": null,
+			"headerData": null,
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"pathVariables": {}
+		},
+		{
+			"id": "24a00792-715d-4410-a17f-6deaf63b6b0d",
+			"name": "Index 2 - Simple Analyzer",
+			"url": "localhost:9200/character_index_2",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n    \"settings\" : {\n        \"analysis\" : {\n            \"analyzer\" : {\n                \"whitespace_lowercase\" : {\n                    \"tokenizer\" : \"whitespace\",\n                    \"filter\" : [\"lowercase\"]\n                }\n            }\n        }\n    },\n    \"mappings\" : {\n        \"properties\" : {\n            \"name\":{\n                \"type\": \"text\",\n                \"analyzer\": \"whitespace_lowercase\"\n            }\n\n        }\n    }\n}\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "29aed828-c312-483c-a0b1-fb175dfedcf1",
+			"name": "Analyze Input",
+			"url": "http://localhost:9200/character_index_3/_analyze",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n\t\"text\": \"Princesses peach\",\n\t\"analyzer\": \"whitespace_lowercase_stemming_analyzer\"\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4994f4a5-1bd4-408c-948f-de431a933c87",
+			"name": "GET Elasticsearch",
+			"url": "localhost:9200",
+			"description": "",
+			"data": null,
+			"dataMode": null,
+			"headerData": null,
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"pathVariables": {}
+		},
+		{
+			"id": "54807cf3-7b7a-4651-807b-9c1fbd202d69",
+			"name": "Index 4 - Edge Ngram",
+			"url": "localhost:9200/character_index_4",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n  \"settings\": {\n    \"analysis\": {\n      \"analyzer\": {\n        \"edge_ngram_analyzer\": {\n          \"tokenizer\": \"edge_ngram_tokenizer\",\n          \"filter\": [ \"lowercase\" ]\n        }\n      },\n      \"tokenizer\": {\n        \"edge_ngram_tokenizer\": {\n          \"type\": \"edge_ngram\",\n          \"min_gram\": 2,\n          \"max_gram\": 5,\n          \"token_chars\": [\"letter\", \"digit\"]\n        }\n      }\n    }\n  },\n  \"mappings\" : {\n      \"properties\" : {\n          \"name\": {\n              \"type\": \"text\",\n              \"analyzer\": \"edge_ngram_analyzer\"\n          }\n      }\n  }\n}\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "54bec153-a92e-44a7-bd9c-ba08ebc40dd6",
+			"name": "Query 2 - Fuzzy",
+			"url": "http://localhost:9200/_search",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"rawModeData": "{\n    \"query\": {\n        \"fuzzy\": {\n            \"name\": {\n                \"value\": \"beach\"\n            }\n        }\n    }\n}\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "63ae4841-453d-4929-89b9-91b66e92a24d",
+			"name": "GET Top whatever docs",
+			"url": "http://localhost:9200/_search",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"rawModeData": "{\n  \"query\": { \n  \t\"match_all\": { \n  \t}\n  }\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "74627d6d-eb6e-4b1f-a686-7815306f7780",
+			"name": "GET mapping for all indices",
+			"url": "http://localhost:9200/_mapping",
+			"description": "",
+			"data": null,
+			"dataMode": null,
+			"headerData": null,
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"pathVariables": {}
+		},
+		{
+			"id": "805577a1-16e6-4f7b-973e-a0ff773d69c5",
+			"name": "Index 3 - English Stemming Tokenizer",
+			"url": "localhost:9200/character_index_3",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n    \"settings\" : {\n        \"analysis\" : {\n            \"analyzer\" : {\n                \"whitespace_lowercase\" : {\n                    \"tokenizer\" : \"whitespace\",\n                    \"filter\" : [\n                        \"lowercase\",\n                        \"english_stemmer\"\n\n                    ]\n                }\n            },\n            \"filter\" : {\n                \"english_stemmer\" : {\n                    \"type\" : \"stemmer\",\n                    \"name\" : \"english\"\n                }\n            }\n        }\n    },\n    \"mappings\" : {\n        \"properties\" : {\n            \"name\":{\n                \"type\": \"text\",\n                \"analyzer\": \"whitespace_lowercase\"\n            }\n\n        }\n    }\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "809af6cd-ab38-4652-ab1f-ae8b14561969",
+			"name": "GET List of Indices",
+			"url": "http://localhost:9200/_cat/indices/?v&s=index",
+			"description": "",
+			"data": null,
+			"dataMode": null,
+			"headerData": null,
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "v",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "s",
+					"value": "index",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"pathVariables": {}
+		},
+		{
+			"id": "a262ed58-ff97-44a8-a7d8-34189d727b23",
+			"name": "Query 1 - Basic",
+			"url": "http://localhost:9200/_search",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"rawModeData": "{\n  \"query\": {\n  \t\"match\": {\n  \t\t\"name\": \"princess\"\n  \t}\n  }\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "d1fbb618-c743-4447-ac05-82d4acb2cb88",
+			"name": "GET analyzer settings of an index",
+			"url": "localhost:9200/character_index_1/_settings",
+			"description": "",
+			"data": null,
+			"dataMode": null,
+			"headerData": null,
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"pathVariables": {}
+		},
+		{
+			"id": "d3d44117-d345-4906-b6d9-95ed64c624ff",
+			"name": "Index 1 - Basic",
+			"url": "localhost:9200/character_index_1",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n    \"mappings\" : {\n        \"properties\" : {\n            \"name\":{\"type\": \"text\"}\n        }\n    }\n}\n",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "f8541456-743a-440b-9eb7-318f2b36ad89",
+			"name": "POST Add document to index",
+			"url": "http://localhost:9200/character_index/_doc",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"rawModeData": "{\n\t\"name\": \"Princess Peach\"\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ff9ad336-dc5c-4690-94b5-fe67a5e5887e",
+			"name": "GET Query against all indices",
+			"url": "http://localhost:9200/_search",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"type": "text"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": null,
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"rawModeData": "{\n  \"query\": { \n  \t\"match\": { \n  \t\t\"name\": \"Princess \" \n  \t}\n  }\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		}
+	]
+}
